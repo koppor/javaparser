@@ -143,7 +143,9 @@ class JavaParserTest {
     void parseLYieldExpression() {
         String code = "yield List.of(1);";
         YieldStmt yieldStmt = (YieldStmt) parseStatement(code);
-        Expression expression = yieldStmt.getExpression();
+        MethodCallExpr methodCallExpr = (MethodCallExpr) yieldStmt.getExpression();
+        IntegerLiteralExpr firstArgument = (IntegerLiteralExpr) methodCallExpr.getArguments().get(0);
+        assertEquals(1, firstArgument.asNumber());
     }
 
     @Test
